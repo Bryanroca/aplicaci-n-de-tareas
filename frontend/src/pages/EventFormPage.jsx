@@ -1,7 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { createEvent } from '../api/events.api';
-import { format } from 'date-fns'; // Importa la función de formato de date-fns
+import { createEvent, DeleteEvent } from '../api/events.api';
+import { format } from 'date-fns';
+import { useNavigate, useParams } from 'react-router-dom'
 
 export function EventFormPage() {
     const {
@@ -10,11 +11,14 @@ export function EventFormPage() {
         formState: { errors },
     } = useForm();
 
+    const navigate = useNavigate();
+    const params = useParams();
+
     const onSubmit = handleSubmit(async (data) => {
-        // Formatea la fecha utilizando date-fns antes de enviarla al servidor
         data.date = format(new Date(data.date), 'yyyy-MM-dd');
         const res = await createEvent(data);
-        console.log(res);
+        console.log(data)
+        navigate("/events")
     });
 
     return (
@@ -33,7 +37,7 @@ export function EventFormPage() {
                 <div>
                     <label>Date:</label>
                     <input
-                        type="date" // Usa el tipo 'date' para el campo de fecha
+                        type="date"
                         {...register('date', {
                             required: 'Date is required',
                         })}
@@ -49,6 +53,14 @@ export function EventFormPage() {
                     <button type="submit">Save</button>
                 </div>
             </form>
+            {params.id && <button onClick={async () => {
+                const message = window.confirm("¿Estas seguro que quieres eliminar la tarea?")
+                if (message) {
+                    await DeleteEvent(params.id);
+                    navigate("/events")
+                }
+            }}>Delete</button>}
+
         </div>
     );
 }

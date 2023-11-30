@@ -12,6 +12,7 @@ function App() {
         <Route path="/" element={<> <Navigate to="/events" /></>} />
         <Route path="/events" element={<EventsPage />} />
         <Route path="/events-create" element={<EventFormPage />} />
+        <Route path="/events/:id" element={<EventFormPage />} />
       </Routes>
     </BrowserRouter>
   );

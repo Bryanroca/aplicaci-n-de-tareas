@@ -4,3 +4,4 @@ const eventsApi = axios.create({ baseURL: 'http://localhost:8000/event/api/v1/ev
 
 export const getAllEvents = () => eventsApi.get('/');
 export const createEvent = (event) => eventsApi.post('/', event);
+export const DeleteEvent = (id) => eventsApi.delete(`/${id}`)
