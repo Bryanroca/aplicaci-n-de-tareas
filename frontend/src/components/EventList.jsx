@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { getAllEvents } from '../api/events.api';
+import { EventCard } from './EventCard';
 
 export function EventList() {
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
-        async function loadEvents() {
-            const res = await getAllEvents();
-            setEvents(res.data);
-        }
+        const loadEvents = async () => {
+            try {
+                const res = await getAllEvents();
+                setEvents(res.data);
+            } catch (error) {
+                console.error('Error loading events:', error);
+            }
+        };
+
         loadEvents();
     }, []);
 
     return (
         <div>
             {events.map((event) => (
-                <div>
-                    <h1>{event.title}</h1>
-                    <h2>{event.description}</h2>
-                </div>
+                <EventCard key={event.id} event={event} />
             ))}
         </div>
     );

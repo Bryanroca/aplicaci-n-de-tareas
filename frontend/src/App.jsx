@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Navigation />
       <Routes>
-        <Route path="/" element={<> <Navigate to="/events" replace={true} /></>} />
+        <Route path="/" element={<> <Navigate to="/events" /></>} />
         <Route path="/events" element={<EventsPage />} />
         <Route path="/events-create" element={<EventFormPage />} />
       </Routes>
