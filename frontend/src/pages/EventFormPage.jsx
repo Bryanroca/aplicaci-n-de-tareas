@@ -125,7 +125,8 @@ export function EventFormPage() {
                             onClick={async () => {
                                 const message = window.confirm('¿Estás seguro que quieres eliminar la tarea?');
                                 if (message) {
-                                    await onDelete(params.id);
+                                    console.log("tarea eliminada")
+                                    await DeleteEvent(params.id);
                                     toast.success('Tarea Eliminada', {
                                         position: 'bottom-right',
                                         style: {

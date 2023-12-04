@@ -10,7 +10,7 @@ export function Navigation() {
                 </Link>
             </button>
             <button className="bg-indigo-500 px-3 py-2 rounded-lg cursor-pointer hover:bg-indigo-700 transition duration-300 ease-in-out">
-                <Link to="/events-create">Crear tarea</Link>
+                <Link to="/events-create">Crear Evento</Link>
             </button>
         </div>
     );
